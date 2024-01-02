@@ -21,7 +21,7 @@ export default function ClientSideAuth() {
     }
     return (
         <>
-            Not Logged In <button onClick={() => signIn('okta')}>Sign in</button>
+            Not Logged In <button onClick={() => signIn()}>Sign in</button>
         </>
     )
 }

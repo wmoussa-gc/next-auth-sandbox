@@ -15,7 +15,7 @@ export async function getServerSideProps(context: any) {
     }
 }
 
-export default function ServerSideAuth(username: string) {
+export default function ServerSideAuth({ username }: { username: string }) {
     return (
         <>
             <h1>Protected Page</h1>
