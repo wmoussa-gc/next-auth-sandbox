@@ -2,7 +2,7 @@ locals {
   account_id       = "545719101351"
   domain           = ""
   env              = "dev"
-  product_name     = "next-auth-sandbox"
+  product_name     = "next-auth-sandbox-wm"
   cost_center_code = "${local.product_name}-${local.env}"
 }
 
