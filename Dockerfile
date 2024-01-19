@@ -12,4 +12,4 @@ COPY --from=public.ecr.aws/cds-snc/aws-lambda-adapter:0.7.0@sha256:00b1441858fb3
 RUN ln -s /tmp ./.next/cache
 
 EXPOSE 3000
-CMD yarn dev
+ENTRYPOINT ["yarn", "start"]

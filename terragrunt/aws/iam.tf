@@ -67,14 +67,3 @@ resource "aws_iam_role_policy_attachment" "web" {
   role       = aws_iam_role.web.name
   policy_arn = aws_iam_policy.web.arn
 }
-
-# Use AWS managed IAM policy
-####
-# Provides minimum permissions for a Lambda function to execute while
-# accessing a resource within a VPC - create, describe, delete network
-# interfaces and write permissions to CloudWatch Logs.
-####
-resource "aws_iam_role_policy_attachment" "AWSLambdaVPCAccessExecutionRole" {
-  role       = aws_iam_role.web.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
-}
