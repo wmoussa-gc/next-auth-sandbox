@@ -1,9 +1,13 @@
 FROM node:18
+ENV NODE_ENV production
 
 WORKDIR /app
 COPY package*.json ./
-RUN yarn install
+RUN yarn install --production=true
+
 COPY . .
+
+RUN yarn build
 
 # Lambda web adapter: https://github.com/awslabs/aws-lambda-web-adapter
 # The public.ecr.aws/awsguru/aws-lambda-adapter:0.7.0 image reference in the docs has

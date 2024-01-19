@@ -1,3 +1,9 @@
-![Next.js, NextAuth.js, and Okta](https://thetombomb-public.s3.amazonaws.com/auth.png)
+## Dummy nextjs + nextauth web app
 
-This repo is associated with the following blog post [Next.js Authentication with Okta and NextAuth.js](https://thetombomb.com/posts/nextjs-nextauth-okta). Follow the article and use this repository to add authentication to your Next.js app with Okta. 
+How to run it locally:
+
+`docker build -t my-app .`
+
+`docker run -p 3000:3000 my-app`
+
+This repo was inspired by the following blog post [Next.js Authentication with Okta and NextAuth.js](https://thetombomb.com/posts/nextjs-nextauth-okta).
