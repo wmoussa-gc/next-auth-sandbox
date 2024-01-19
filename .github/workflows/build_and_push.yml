@@ -1,0 +1,55 @@
+name: Build and Push Container to ECR
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+env:
+  GITHUB_SHA: ${{ github.sha }}
+  REGISTRY: 545719101351.dkr.ecr.ca-central-1.amazonaws.com/next-auth-sandbox-wm
+
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+  actions: write
+  checks: write
+  statuses: write
+  security-events: write
+
+jobs:
+  build-push-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3.0.2
+
+      - name: Configure AWS credentials using OIDC
+        uses: aws-actions/configure-aws-credentials@8c3f20df09ac63af7b3ae3d7c91f105f857d8497 # v4.0.0
+        with:
+          role-to-assume: arn:aws:iam::414662622316:role/simplify-privacy-statements-V2-apply
+          role-session-name: ECRPush
+          aws-region: ca-central-1
+
+      - name: Build Container
+        run: |
+          docker build -t ${{ env.IMAGE_NAME }}:$GITHUB_SHA .
+
+      - name: Login to ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@9149ade017c57f86dea2f76a01f8b2d5bd06b10f # tag=v1.5.1
+
+      - name: Push containers to ECR
+        run: |
+          docker push ${{ env.IMAGE_NAME }}:$GITHUB_SHA
+
+      - name: Deploy new image
+        run: |
+          aws lambda update-function-code \
+            --function-name $FUNCTION_NAME \
+            --image-uri ${{ env.IMAGE_NAME }}:$GITHUB_SHA > /dev/null 2>&1
+
+
+      - name: Logout of Amazon ECR
+        run: docker logout ${{ steps.login-ecr.outputs.registry }}      
