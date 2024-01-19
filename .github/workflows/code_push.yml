@@ -17,8 +17,9 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{env.NODE_VERSION}}
-    - name: yarn build
+    - name: yarn install and build
       run: |
+        yarn install
         yarn build
       env:
         CI: true
