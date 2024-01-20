@@ -7,6 +7,7 @@ on:
 
 env:
   GITHUB_SHA: ${{ github.sha }}
+  FUNCTION_NAME: next_lambda_function
   REGISTRY: 545719101351.dkr.ecr.ca-central-1.amazonaws.com/next-auth-sandbox-wm
 
 jobs:
@@ -26,7 +27,7 @@ jobs:
 
       - name: Build Container
         run: |
-          docker build -t ${{ env.IMAGE_NAME }}:$GITHUB_SHA .
+          docker build -t ${{ env.REGISTRY }}:$GITHUB_SHA .
 
       - name: Login to ECR
         id: login-ecr
@@ -34,13 +35,13 @@ jobs:
 
       - name: Push containers to ECR
         run: |
-          docker push ${{ env.IMAGE_NAME }}:$GITHUB_SHA
+          docker push ${{ env.REGISTRY }}:$GITHUB_SHA
 
       - name: Deploy new image
         run: |
           aws lambda update-function-code \
             --function-name $FUNCTION_NAME \
-            --image-uri ${{ env.IMAGE_NAME }}:$GITHUB_SHA > /dev/null 2>&1
+            --image-uri ${{ env.REGISTRY }}:$GITHUB_SHA > /dev/null 2>&1
 
 
       - name: Logout of Amazon ECR
