@@ -14,14 +14,6 @@ env:
   TERRAGRUNT_VERSION: 0.44.4
   CONFTEST_VERSION: 0.27.0
 
-permissions:
-  id-token: write
-  contents: read
-  pull-requests: write
-  actions: write
-  checks: write
-  statuses: write
-  
 jobs:
   terragrunt-apply:
     runs-on: ubuntu-latest
