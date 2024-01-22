@@ -1,5 +1,5 @@
 resource "aws_lambda_function" "web" {
-  function_name = "next-js-website"
+  function_name = "next_lambda_function"
   role          = aws_iam_role.web.arn
   package_type  = "Image"
   memory_size   = 1024
