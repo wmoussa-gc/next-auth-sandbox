@@ -27,7 +27,8 @@ jobs:
       - name: Build Container
         run: |
           docker build \
-          -t ${{ env.REGISTRY }}:$GITHUB_SHA . \
+          --build-arg git_sha=$GITHUB_SHA \
+          -t ${{ env.REGISTRY }}:$GITHUB_SHA \
           -t ${{ env.REGISTRY }}:latest .
 
       - name: Login to ECR
