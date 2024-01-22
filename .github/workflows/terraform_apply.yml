@@ -14,7 +14,7 @@ env:
   CONFTEST_VERSION: 0.27.0
 
 jobs:
-  terragrunt-apply: 
+  terragrunt-apply:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -28,7 +28,6 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: ca-central-1
 
       - name: Terraform Apply
