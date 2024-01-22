@@ -1,5 +1,5 @@
 resource "aws_ecr_repository" "web" {
-
+  # to
   name                 = "${var.product_name}/web"
   image_tag_mutability = "MUTABLE"
 
