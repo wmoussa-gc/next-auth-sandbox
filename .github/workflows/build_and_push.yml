@@ -28,6 +28,9 @@ jobs:
         run: |
           docker build \
           --build-arg git_sha=$GITHUB_SHA \
+          --secret ${{ secrets.OKTA_OAUTH2_CLIENT_ID }} \
+          --secret ${{ secrets.OKTA_OAUTH2_CLIENT_SECRET }} \
+          --secret ${{ secrets.SECRET }} \
           -t ${{ env.REGISTRY }}:$GITHUB_SHA \
           -t ${{ env.REGISTRY }}:latest .
 

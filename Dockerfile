@@ -15,5 +15,14 @@ RUN yarn build
 COPY --from=public.ecr.aws/cds-snc/aws-lambda-adapter:0.7.0@sha256:00b1441858fb3f4ce3d67882ef6153bacf8ff4bb8bf271750c133667202926af /lambda-adapter /opt/extensions/lambda-adapter
 RUN ln -s /tmp ./.next/cache
 
+RUN --mount=type=secret,id=OKTA_OAUTH2_CLIENT_ID \
+    sed -i "s/OKTA_OAUTH2_CLIENT_ID=/OKTA_OAUTH2_CLIENT_ID=$(cat /run/secrets/OKTA_OAUTH2_CLIENT_ID)/" .env.production
+
+RUN --mount=type=secret,id=OKTA_OAUTH2_CLIENT_SECRET \
+    sed -i "s/OKTA_OAUTH2_CLIENT_SECRET=/OKTA_OAUTH2_CLIENT_SECRET=$(cat /run/secrets/OKTA_OAUTH2_CLIENT_SECRET)/" .env.production
+
+RUN --mount=type=secret,id=SECRET \
+    sed -i "s/SECRET=/SECRET=$(cat /run/secrets/SECRET)/" .env.production
+
 EXPOSE 3000
 ENTRYPOINT ["yarn", "start"]
