@@ -8,7 +8,7 @@ on:
 env:
   GITHUB_SHA: ${{ github.sha }}
   FUNCTION_NAME: next_lambda_function
-  REGISTRY: 545719101351.dkr.ecr.ca-central-1.amazonaws.com/next-auth-sandbox-wm
+  REGISTRY: 545719101351.dkr.ecr.ca-central-1.amazonaws.com/next-auth-sandbox-wm/web
 
 jobs:
   build-push-and-deploy:
