@@ -26,7 +26,9 @@ jobs:
 
       - name: Build Container
         run: |
-          docker build -t ${{ env.REGISTRY }}:$GITHUB_SHA .
+          docker build \
+          -t ${{ env.REGISTRY }}:$GITHUB_SHA . \
+          -t ${{ env.REGISTRY }}:latest .
 
       - name: Login to ECR
         id: login-ecr
@@ -35,6 +37,7 @@ jobs:
       - name: Push containers to ECR
         run: |
           docker push ${{ env.REGISTRY }}:$GITHUB_SHA
+          docker push ${{ env.REGISTRY }}:latest
 
       - name: Deploy new image
         run: |
