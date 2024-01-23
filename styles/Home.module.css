@@ -45,6 +45,10 @@
   font-size: 4rem;
 }
 
+.description a {
+  color: #0070f3;
+}
+
 .title,
 .description {
   text-align: center;
