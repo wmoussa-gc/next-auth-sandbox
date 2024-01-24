@@ -9,8 +9,7 @@ export const authOptions = {
             clientSecret: process.env.OKTA_OAUTH2_CLIENT_SECRET as string,
             issuer: process.env.OKTA_OAUTH2_ISSUER as string,
         }),
-    ],
-    secret: process.env.SECRET as string
+    ]
 }
 
 export default NextAuth(authOptions)

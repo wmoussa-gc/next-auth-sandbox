@@ -22,7 +22,7 @@ RUN --mount=type=secret,id=OKTA_OAUTH2_CLIENT_SECRET \
     sed -i "s/OKTA_OAUTH2_CLIENT_SECRET=/OKTA_OAUTH2_CLIENT_SECRET=$(cat /run/secrets/OKTA_OAUTH2_CLIENT_SECRET)/" .env.production
 
 RUN --mount=type=secret,id=SECRET \
-    sed -i "s/SECRET=/SECRET=$(cat /run/secrets/SECRET)/" .env.production
+    sed -i "s/NEXTAUTH_SECRET=/NEXTAUTH_SECRET=$(cat /run/secrets/NEXTAUTH_SECRET)/" .env.production
 
 EXPOSE 3000
 ENTRYPOINT ["yarn", "start"]

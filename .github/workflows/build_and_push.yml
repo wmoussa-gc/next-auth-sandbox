@@ -11,7 +11,7 @@ env:
   REGISTRY: 545719101351.dkr.ecr.ca-central-1.amazonaws.com/next-auth-sandbox-wm/web
   OKTA_OAUTH2_CLIENT_ID: ${{ secrets.OKTA_OAUTH2_CLIENT_ID }}
   OKTA_OAUTH2_CLIENT_SECRET: ${{ secrets.OKTA_OAUTH2_CLIENT_SECRET }}
-  SECRET: ${{ secrets.SECRET }}
+  NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
 
 jobs:
   build-push-and-deploy:
@@ -33,7 +33,7 @@ jobs:
           --build-arg git_sha=$GITHUB_SHA \
           --secret id=OKTA_OAUTH2_CLIENT_ID,env=OKTA_OAUTH2_CLIENT_ID \
           --secret id=OKTA_OAUTH2_CLIENT_SECRET,env=OKTA_OAUTH2_CLIENT_SECRET \
-          --secret id=SECRET,env=SECRET \
+          --secret id=NEXTAUTH_SECRET,env=NEXTAUTH_SECRET \
           -t ${{ env.REGISTRY }}:$GITHUB_SHA \
           -t ${{ env.REGISTRY }}:latest .
 
